@@ -16,25 +16,25 @@ const GallerySection = () => {
 
   const images: GalleryImage[] = [
     {
-      src: 'https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80',
+      src: '/images/facilities/dance-hall-1.jpg',
       alt: 'Tanzsaal 1',
       title: 'Saal 1',
       description: 'Unser größter Saal bietet Platz für bis zu 40 Paare und ist perfekt für Standardtänze.'
     },
     {
-      src: 'https://images.unsplash.com/photo-1504639725590-34d094e3909d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80',
+      src: '/images/facilities/dance-hall-2.jpg',
       alt: 'Tanzsaal 2',
       title: 'Saal 2',
       description: 'Mit modernen Spiegeln und hochwertigem Parkettboden ideal für Hip Hop und moderne Tänze.'
     },
     {
-      src: 'https://images.unsplash.com/photo-1594125894500-5143e9673a8a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80',
+      src: '/images/facilities/dance-hall-3.jpg',
       alt: 'Tanzsaal 3',
       title: 'Saal 3',
       description: 'Unser intimster Saal bietet eine gemütliche Atmosphäre für kleinere Gruppen.'
     },
     {
-      src: 'https://images.unsplash.com/photo-1621263764A7-09908b354tbc?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1287&q=80',
+      src: '/images/facilities/foyer.jpg',
       alt: 'Foyer',
       title: 'Foyer & Bar',
       description: 'Entspanne dich vor oder nach dem Unterricht in unserem gemütlichen Foyer mit Bar.'
@@ -78,11 +78,20 @@ const GallerySection = () => {
               onClick={() => openLightbox(image)}
             >
               <div className="aspect-w-3 aspect-h-2">
-                <img 
-                  src={image.src} 
-                  alt={image.alt} 
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
+                {image.src.startsWith('/images') ? (
+                  <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                    <div className="text-center p-4">
+                      <div className="text-3xl text-gray-500 mb-2">{index + 1}</div>
+                      <h3 className="text-lg font-bold text-gray-700">{image.title}</h3>
+                    </div>
+                  </div>
+                ) : (
+                  <img 
+                    src={image.src} 
+                    alt={image.alt} 
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                )}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
                 <div className="absolute bottom-0 left-0 p-4 text-white">
                   <h3 className="text-lg font-bold">{image.title}</h3>
@@ -127,11 +136,20 @@ const GallerySection = () => {
             className="relative max-w-4xl w-full rounded-xl overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
-            <img 
-              src={selectedImage.src} 
-              alt={selectedImage.alt} 
-              className="w-full h-auto"
-            />
+            {selectedImage.src.startsWith('/images') ? (
+              <div className="w-full aspect-video bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center">
+                <div className="text-center p-4">
+                  <h3 className="text-2xl font-bold text-white mb-2">{selectedImage.title}</h3>
+                  <p className="text-gray-300">{selectedImage.description}</p>
+                </div>
+              </div>
+            ) : (
+              <img 
+                src={selectedImage.src} 
+                alt={selectedImage.alt} 
+                className="w-full h-auto"
+              />
+            )}
             <div className="absolute bottom-0 left-0 right-0 bg-black/60 text-white p-6">
               <h3 className="text-xl font-bold mb-2">{selectedImage.title}</h3>
               <p>{selectedImage.description}</p>

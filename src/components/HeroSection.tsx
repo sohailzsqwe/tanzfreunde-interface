@@ -26,12 +26,8 @@ const HeroSection = () => {
     <section className="relative h-screen flex items-center overflow-hidden">
       {/* Background Image */}
       <div className="absolute inset-0 z-0">
-        <div className="absolute inset-0 bg-gradient-to-r from-black/40 to-black/30 z-10" />
-        <img
-          src="https://images.unsplash.com/photo-1541904845547-0eaf866de1d6?q=80&w=2665&auto=format&fit=crop"
-          alt="Tanzende Paare"
-          className="w-full h-full object-cover object-center"
-        />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-black/40 z-10" />
+        <div className="absolute inset-0 bg-[url('/images/hero/ballroom-dance.jpg')] bg-cover bg-center z-0" />
       </div>
 
       {/* Content */}

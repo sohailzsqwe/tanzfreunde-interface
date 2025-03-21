@@ -3,6 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Instagram, Facebook, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 
 interface TeamMember {
   name: string;
@@ -21,7 +22,7 @@ const TeamSection = () => {
     {
       name: 'Uwe Höftmann',
       role: 'ADTV-Tanzlehrer, ZUMBA-Instructor',
-      image: 'https://images.unsplash.com/photo-1564564321837-a57b7070ac4f?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2076&q=80',
+      image: '/images/team/instructor-male-1.jpg',
       description: 'Mit über 20 Jahren Erfahrung leitet Uwe die Tanzschule mit Leidenschaft und Expertise.',
       specialties: ['Standardtänze', 'Zumba', 'Fitnesskurse'],
       social: {
@@ -32,7 +33,7 @@ const TeamSection = () => {
     {
       name: 'Laura Schmidt',
       role: 'ADTV-Tanzlehrerin',
-      image: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1361&q=80',
+      image: '/images/team/instructor-female-1.jpg',
       description: 'Laura begeistert besonders Kinder und Jugendliche mit ihrem modernen Unterrichtsstil.',
       specialties: ['Kindertanz', 'Hip Hop', 'Hochzeitskurse'],
       social: {
@@ -42,7 +43,7 @@ const TeamSection = () => {
     {
       name: 'Michael Becker',
       role: 'Tanzlehrer, Hip-Hop-Spezialist',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1374&q=80',
+      image: '/images/team/instructor-male-2.jpg',
       description: 'Michael bringt frischen Wind und urbane Tanzstile in unser Kursprogramm.',
       specialties: ['Hip Hop', 'Breakdance', 'Urban Styles'],
       social: {
@@ -53,7 +54,7 @@ const TeamSection = () => {
     {
       name: 'Sabine Müller',
       role: 'Seniorentanz-Expertin',
-      image: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1288&q=80',
+      image: '/images/team/instructor-female-2.jpg',
       description: 'Mit viel Geduld und Herzlichkeit leitet Sabine unsere beliebten Seniorenkurse.',
       specialties: ['Seniorentanz', 'Discofox', 'Gesellschaftstänze'],
     }
@@ -84,12 +85,23 @@ const TeamSection = () => {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
             >
-              <div className="relative h-60 overflow-hidden">
-                <img 
-                  src={member.image} 
-                  alt={member.name} 
-                  className="w-full h-full object-cover object-center"
-                />
+              <div className="relative h-60 overflow-hidden bg-gradient-to-br from-teal-50 to-teal-100">
+                {member.image.startsWith('/images') ? (
+                  <div className="w-full h-full flex items-center justify-center">
+                    <Avatar className="w-40 h-40 border-4 border-white shadow-lg">
+                      <AvatarFallback className="bg-teal-100 text-teal-800 text-2xl">
+                        {member.name.split(' ').map(n => n[0]).join('')}
+                      </AvatarFallback>
+                      <AvatarImage src={member.image} alt={member.name} className="object-cover" />
+                    </Avatar>
+                  </div>
+                ) : (
+                  <img 
+                    src={member.image} 
+                    alt={member.name} 
+                    className="w-full h-full object-cover object-center"
+                  />
+                )}
                 {member.social && (
                   <div className="absolute top-4 right-4 flex space-x-2">
                     {member.social.instagram && (
