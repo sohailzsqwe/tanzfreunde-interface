@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
+import Courses from "./pages/Courses";
+import Offers from "./pages/Offers";
 import Course from "./pages/Course";
 import Team from "./pages/Team";
 import Gallery from "./pages/Gallery";
@@ -21,8 +23,10 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/kurse" element={<Courses />} />
           <Route path="/kurse/:id" element={<Course />} />
           <Route path="/tanzarten/:id" element={<Course />} />
+          <Route path="/angebote" element={<Offers />} />
           <Route path="/team" element={<Team />} />
           <Route path="/gallery" element={<Gallery />} />
           <Route path="/kontakt" element={<Contact />} />

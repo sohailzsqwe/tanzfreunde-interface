@@ -15,6 +15,7 @@ interface CourseCardProps {
 const CourseCard: React.FC<CourseCardProps> = ({ title, description, image, link, delay = 0 }) => {
   // Check if this is one of our placeholder images
   const isPlaceholder = image.startsWith('/images');
+  const [imageError, setImageError] = React.useState(false);
   
   return (
     <motion.div
@@ -26,7 +27,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ title, description, image, link
       className="flex flex-col bg-white rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
     >
       <div className="relative h-52 overflow-hidden">
-        {isPlaceholder ? (
+        {isPlaceholder || imageError ? (
           <div className="w-full h-full bg-gradient-to-br from-teal-400/30 to-teal-500/40 flex items-center justify-center">
             <div className="text-center p-4">
               <div className="w-16 h-16 mx-auto mb-2 rounded-full bg-white/80 flex items-center justify-center">
@@ -40,6 +41,7 @@ const CourseCard: React.FC<CourseCardProps> = ({ title, description, image, link
             src={image} 
             alt={title} 
             className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-105"
+            onError={() => setImageError(true)}
           />
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent" />
